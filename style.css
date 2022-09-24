@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    background-color: black;
+    color: #ffc600;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.choices {
+    justify-self: center;
+    display: flex;
+    flex: 1;
+    align-content: space-between;
+    gap: 30px;
+
+    min-height: 10vh;
+}
+
+button {
+    flex: 1 1 100%;
+    background-color: black;
+    color: #ffc600;
+    border-color: #ffc600;
+    font-size: 25px;
+    width: 150px;
+    border-radius: 10%;
+}
+
+div {
+    flex: auto;
+    text-align: center;
+}
+
+
+#winner {
+    font-size: 35px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    gap: 35px;
+}

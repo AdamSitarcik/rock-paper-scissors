@@ -5,71 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock paper scissors</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="choices">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="result_div">
+        <p id="who_won"></p>
+        <div class="score">
+            <div id="pc_score"></div>
+            <div id="player_score"></div>
+        </div>
+        <div id="winner"></div>
+    </div>
     <script>
         choices = ['rock', 'paper', 'scissors'];
+        let win_pc = 0;
+        let win_player = 0;
 
         function getComputerChoice() {
             return choices[Math.floor(Math.random()*choices.length)]
         }
         
-        function getHumanChoice() {
-            let answer = prompt('Enter your choice!');
-            answer = answer.toLowerCase();
-            if(choices.includes(answer)){
-                return answer;
-            }    
-            else{
-            }
-        }
-        
-        function playRound(getComputerChoice, getComputerChoice){
-            let computerSelection = getComputerChoice();
-            let playerSelection = getHumanChoice();
+        const container = document.querySelector('.choices');
+        const winner = document.querySelector('#winner');
 
-            console.log(`PC: ${computerSelection}, You: ${playerSelection}`);        
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => button.addEventListener('click', playRound));
+        
+        function playRound(e){
+            let computerSelection = getComputerChoice();
+            let playerSelection = e.target.id;
+
+            const result_p = document.querySelector('#who_won');
             if(playerSelection.toLowerCase() === computerSelection){
-                console.log('Tie!');
-                return playRound(playerSelection, getComputerChoice);
+                // return playRound(playerSelection, getComputerChoice);
+                result_p.textContent = 'It\'s a tie!';
             }
             else if((playerSelection.toLowerCase() === 'rock' && computerSelection === 'paper') || (playerSelection.toLowerCase() === 'scissors' && computerSelection === 'rock') || (playerSelection.toLowerCase() === 'paper' && computerSelection === 'scissors')){
-                return('You lost!');
+                // return('You lost!');
+                result_p.textContent = 'You lost!';
+                win_pc += 1;
             }
             else{
-                return('You won!');
+                // return('You won!');
+                result_p.textContent = 'You won!';
+                win_player += 1;
+            }
+            updateScore();
+
+            if(win_pc === 5){ 
+                winner.textContent = 'PC won the game!';
+                win_pc = 0;
+                win_player = 0;
+            }
+            else if(win_player === 5){
+                winner.textContent = 'You won the game!'; 
+                win_pc = 0;
+                win_player = 0;
+            }
+            else{
+                winner.textContent = '';
             }
         }
 
-        function game(){
-            win_pc = 0;
-            win_you = 0;
-            for(let i = 0; i < 5; i++){
-                result = playRound(getComputerChoice, getComputerChoice);
-                console.log(result);
-                if(result === 'You lost!'){
-                    win_pc += 1;
-                    if(win_pc === 3) break;
-                }
-                else if(result === 'You won!'){
-                    win_you += 1;
-                    if(win_you === 3) break;
-                }
-            }
-            console.log(`PC wins: ${win_pc}`);
-            console.log(`Your wins: ${win_you}`);
-            if(win_pc > win_you){
-                console.log('PC won the game!');
-            }
-            else if(win_pc === win_you){
-                console.log('Draw!')
-            }
-            else{
-                console.log('You won the game!');
-            }
-        }
+        function updateScore(){
+            const pc_score = document.querySelector('#pc_score');
+            pc_score.textContent = `PC: ${win_pc}`;
 
-        game();
+            const player_score = document.querySelector('#player_score');
+            player_score.textContent = `Player: ${win_player}`;
+        }
     </script>
 </body>
 </html>
