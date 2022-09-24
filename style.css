@@ -1,10 +1,18 @@
+html {
+    background-size: cover;
+    position: relative;
+}
+
 body {
+    height: auto;
+    min-width: 60vw;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    /* align-content: space-between;  */
     align-items: center;
+    justify-content: space-around;
     background-color: black;
-    color: #ffc600;
+    color: rgb(196, 196, 196);
     font-size: 25px;
     font-weight: bold;
     font-family: sans-serif;
@@ -15,19 +23,37 @@ body {
     display: flex;
     flex: 1;
     align-content: space-between;
-    gap: 30px;
-
-    min-height: 10vh;
+    justify-content: center;
+    max-width: 60vw;
 }
 
 button {
-    flex: 1 1 100%;
+    flex: auto;
     background-color: black;
     color: #ffc600;
     border-color: #ffc600;
     font-size: 25px;
     width: 150px;
     border-radius: 10%;
+    display: flex;
+}
+
+img {
+    flex: 1 0 0;
+    max-height: 150px;
+    padding: 10px;
+    border: 3px solid white;
+    border-radius: 10%;
+}
+
+.button {
+    transition: all 0.3s;
+}
+
+
+.button:hover {
+    cursor: pointer;
+    scale: 1.1;
 }
 
 div {
@@ -45,4 +71,11 @@ div {
     justify-content: space-between;
     margin: auto;
     gap: 35px;
+    max-width: 350px;
 }
+
+.result_div {
+    display: flex;
+    flex-direction: column;
+    /* gap: 50px; */
+} 

@@ -9,9 +9,15 @@
 </head>
 <body>
     <div class="choices">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+        <div class="button">
+            <img src="rock.png" alt="Rock">
+        </div>
+        <div class="button">
+            <img src="paper.png" alt="Paper">
+        </div>
+        <div class="button">
+            <img src="scissors.png" alt="Scissors">
+        </div>
     </div>
     <div class="result_div">
         <p id="who_won"></p>
@@ -33,25 +39,31 @@
         const container = document.querySelector('.choices');
         const winner = document.querySelector('#winner');
 
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => button.addEventListener('click', playRound));
-        
-        function playRound(e){
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => button.addEventListener('click', () => {
+            const img = button.querySelector("img");
+            let playerSelection = img.alt.toLowerCase();
             let computerSelection = getComputerChoice();
-            let playerSelection = e.target.id;
+
+            playRound(playerSelection, computerSelection);
+        }));
+        
+        function playRound(playerSelection, computerSelection){
+            console.log(playerSelection);
 
             const result_p = document.querySelector('#who_won');
-            if(playerSelection.toLowerCase() === computerSelection){
-                // return playRound(playerSelection, getComputerChoice);
+            if(playerSelection === computerSelection){
                 result_p.textContent = 'It\'s a tie!';
             }
-            else if((playerSelection.toLowerCase() === 'rock' && computerSelection === 'paper') || (playerSelection.toLowerCase() === 'scissors' && computerSelection === 'rock') || (playerSelection.toLowerCase() === 'paper' && computerSelection === 'scissors')){
-                // return('You lost!');
+            else if(
+                (playerSelection === 'rock' && computerSelection === 'paper') ||
+                (playerSelection === 'scissors' && computerSelection === 'rock') ||
+                (playerSelection === 'paper' && computerSelection === 'scissors')){
+
                 result_p.textContent = 'You lost!';
                 win_pc += 1;
             }
             else{
-                // return('You won!');
                 result_p.textContent = 'You won!';
                 win_player += 1;
             }
